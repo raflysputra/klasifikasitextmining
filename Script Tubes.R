@@ -51,35 +51,6 @@ View(playstorebersih)
 
 
 write.csv(playstorebersih,file="D:/playstorebersih.csv")
-
-####NAIVE BAYES CLASIFIER############
-dataset<-read.csv("playstorebersih.csv")
-View(dataset)
-
-sample=sample(1:nrow(dataset),0.8*nrow(dataset),replace=TRUE)
-
-training=data.frame(dataset)[sample,]
-testing=data.frame(dataset)[-sample,]
-
-library(e1071)
-model <- naiveBayes(as.factor(category)~., data=training)
-prediction <- predict(model, testing)
-library(caret)
-naive_model<-confusionMatrix(table(prediction,testing$category))
-naive_model=data.frame(testing$category,prediction)
-colnames(naive_model) = c("Aktual", "Prediksi")
-head(naive_model, n = 10)
-
-ketepatan=confusionMatrix(table(prediction,testing$category))
-eval_naive <- data.frame(Accuracy = ketepatan$overall[1],
-                         Recall = ketepatan$byClass[1],
-                         Specificity = ketepatan$byClass[2],
-                         Precision = ketepatan$byClass[3])
-round(eval_naive,2)
-
-
-
-
 #############SVM#############
 
 
